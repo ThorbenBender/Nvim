@@ -80,7 +80,7 @@ local plugins = {
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
-    cmd = { "DapInstall", "DapUninstall" },
+    cmd = { "DapInstall", "DapUninstall", "DapContinue" },
     config = function()
       require("mason-nvim-dap").setup {
         ensure_installed = { "firefox", "node2", "codelldb", "bash" },
@@ -89,9 +89,35 @@ local plugins = {
           function(config)
             require("mason-nvim-dap").default_setup(config)
           end,
+          node2 = function()
+            config.adapters = {
+              type = "executable",
+              command = "node-debug2-adapter",
+              args = { mason_path .. "package/node-debug2-adapter/out/src/nodeDebug.js" },
+            }
+            config.configurations.svelte = {
+              {
+                type = "node2",
+                request = "launch",
+                program = "${workspaceFolder}/${file}",
+                cwd = vim.fn.getcwd(),
+                sourceMaps = true,
+                protocol = "inspector",
+                console = "integratedTerminal",
+              },
+            }
+            require("mason-nvim-dap").default_setup(config)
+          end,
         },
       }
     end,
+  },
+  {
+    "rcarriga/nvim-dap-ui",
+    config = function()
+      require("dapui").setup()
+    end,
+    dependencies = { "mfussenegger/nvim-dap" },
   },
   {
     "hrsh7th/nvim-cmp",
