@@ -1,0 +1,27 @@
+local servers = {
+  "tsserver",
+  "tailwindcss",
+  "svelte",
+  "clangd",
+  "rust_analyzer",
+  "astro",
+  "arduino_language_server",
+  "bashls",
+  "cssls",
+  "denols",
+  "dockerls",
+  "docker_compose_language_service",
+  "eslint",
+  "golangci_lint_ls",
+  "html",
+  "jsonls",
+  "marksman",
+  "pyright",
+  "sqlls",
+  "taplo",
+  "lemminx",
+  "yamlls",
+  "zls",
+}
+
+return servers
