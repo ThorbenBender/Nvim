@@ -83,7 +83,7 @@ local plugins = {
     cmd = { "DapInstall", "DapUninstall", "DapContinue" },
     config = function()
       require("mason-nvim-dap").setup {
-        ensure_installed = { "firefox", "node2", "codelldb", "bash" },
+        ensure_installed = { "firefox", "js-debug-adapter", "codelldb", "bash" },
         automatic_installation = true,
         handlers = {
           function(config)
@@ -145,13 +145,6 @@ local plugins = {
   },
   {
     "tpope/vim-fugitive",
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    config = function()
-      require "custom.configs.toggleTerm"
-    end,
   },
   {
     "kdheepak/lazygit.nvim",
