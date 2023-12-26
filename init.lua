@@ -6,6 +6,8 @@ if custom_init_path then
   dofile(custom_init_path)
 end
 
+vim.opt.clipboard:append { "unnamedplus" }
+
 require("core.utils").load_mappings()
 
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
