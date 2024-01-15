@@ -79,40 +79,6 @@ local plugins = {
     "mfussenegger/nvim-dap",
   },
   {
-    "jay-babu/mason-nvim-dap.nvim",
-    cmd = { "DapInstall", "DapUninstall", "DapContinue" },
-    config = function()
-      require("mason-nvim-dap").setup {
-        ensure_installed = { "firefox", "js-debug-adapter", "codelldb", "bash" },
-        automatic_installation = true,
-        handlers = {
-          function(config)
-            require("mason-nvim-dap").default_setup(config)
-          end,
-          node2 = function()
-            config.adapters = {
-              type = "executable",
-              command = "node-debug2-adapter",
-              args = { mason_path .. "package/node-debug2-adapter/out/src/nodeDebug.js" },
-            }
-            config.configurations.svelte = {
-              {
-                type = "node2",
-                request = "launch",
-                program = "${workspaceFolder}/${file}",
-                cwd = vim.fn.getcwd(),
-                sourceMaps = true,
-                protocol = "inspector",
-                console = "integratedTerminal",
-              },
-            }
-            require("mason-nvim-dap").default_setup(config)
-          end,
-        },
-      }
-    end,
-  },
-  {
     "rcarriga/nvim-dap-ui",
     config = function()
       require("dapui").setup()

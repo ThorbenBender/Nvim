@@ -31,12 +31,6 @@ M.dap = {
       "<cmd> DapToggleBreakpoint <CR>",
       "Toggle breakpoint",
     },
-    ["<leader>dt"] = {
-      function()
-        require("dapui").toggle()
-      end,
-      "Toggle Dapui Interface",
-    },
     ["<leader>dus"] = {
       function()
         local widgets = require "dap.ui.widgets"

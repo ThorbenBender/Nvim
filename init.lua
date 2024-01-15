@@ -7,6 +7,7 @@ if custom_init_path then
 end
 
 vim.opt.clipboard:append { "unnamedplus" }
+vim.opt.relativenumber = true
 
 require("core.utils").load_mappings()
 

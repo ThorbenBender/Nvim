@@ -22,7 +22,7 @@ local servers = {
   "lemminx",
   "yamlls",
   "zls",
-  "eslint-lsp",
+  -- "eslint-lsp",
 }
 
 return servers
