@@ -7,9 +7,13 @@ local options = {
   on_attach = on_attach,
   capabilities = capabilities,
   server = {
+
     settings = {
       ["rust-analyzer"] = {
         cmd = { "/usr/bin/rust-analyzer" },
+        check = {
+          command = "clippy",
+        },
       },
     },
   },

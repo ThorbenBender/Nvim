@@ -16,6 +16,32 @@ lspconfig.svelte.setup {
   root_dir = util.root_pattern("package.json", ".git"),
 }
 
+-- lspconfig.tsserver.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   init_options = {
+--     preferences = {
+--       importModuleSpecifierPreference = "relative",
+--     },
+--   },
+--   cmd = { "typescript-language-server", "--stdio" },
+--   root_dir = lspconfig.util.root_pattern("pnpm-lock.yaml", "package.json", "tsconfig.json", ".git"),
+-- }
+
+lspconfig.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    gopls = {
+      completeUnimported = true,
+      usePlaceholders = true,
+    },
+  },
+}
+
 lspconfig.clangd.setup {
   on_attach = function(client, bufnr)
     client.server_capabilities.signatureHelpProvider = false
