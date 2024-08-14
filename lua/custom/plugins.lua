@@ -24,6 +24,13 @@ local plugins = {
     end,
   },
   {
+		"stevearc/conform.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("custom.configs.conform")
+		end,
+	},
+  {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -37,7 +44,7 @@ local plugins = {
         "stylua",
       },
     },
-    config = function(_, opts)
+    config = function()
       require("mason-null-ls").setup(opts)
     end,
   },

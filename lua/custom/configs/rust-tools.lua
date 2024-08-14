@@ -13,6 +13,10 @@ local options = {
         cmd = { "/usr/bin/rust-analyzer" },
         check = {
           command = "clippy",
+          extraArgs = { "--all-targets", "--all-features" }
+        },
+        cargo = {
+          features = "all"
         },
       },
     },

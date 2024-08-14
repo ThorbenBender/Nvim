@@ -8,25 +8,32 @@ local opts = {
     formatting.golines,
     formatting.stylua,
     formatting.clang_format,
-    formatting.prettier.with {
-      extra_filetypes = { "svelte", "vue" },
-      extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-    },
   },
   on_attach = function(client, bufnr)
     if client.supports_method "textDocument/formatting" then
-      vim.api.nvim_clear_autocmds {
-        group = augroup,
-        buffer = bufnr,
-      }
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format { bufnr = bufnr }
-        end,
-        [[ desc = "[lsp] format on save" ]],
-      })
+      local ok, err = pcall(function()
+        vim.api.nvim_clear_autocmds {
+          group = augroup,
+          buffer = bufnr,
+        }
+      end)
+      if not ok then
+        print("Error at clearing buffer", err)
+      end
+      ok, err = pcall(function()
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          group = augroup,
+          buffer = bufnr,
+          callback = function()
+            print("formatting")
+            vim.lsp.buf.format { bufnr = bufnr }
+          end,
+          desc = "[lsp] format on save",
+        })
+      end)
+      if not ok then
+        print("Error creating autocommand:", err)
+      end
     end
   end,
 }
