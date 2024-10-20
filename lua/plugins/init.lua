@@ -240,7 +240,6 @@ local default_plugins = {
       dofile(vim.g.base46_cache .. "telescope")
       local telescope = require "telescope"
       telescope.setup(opts)
-      require('telescope').load_extension('git_worktree')
 
       -- load extensions
       for _, ext in ipairs(opts.extensions_list) do
