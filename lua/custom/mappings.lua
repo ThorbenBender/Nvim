@@ -20,8 +20,8 @@ end
 M.worktrees = {
   n = {
     ["<leader>sr"] = {
-      "<cmd>lua require('telescope').git_worktree.git_worktrees()<CR>",
-      "Show worktress",
+      "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>",
+      "Show worktrees",
     },
   },
 }
