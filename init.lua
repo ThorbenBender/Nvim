@@ -8,18 +8,48 @@ if custom_init_path then
 end
 vim.g.git_worktree_log_level = "debug"
 vim.opt.clipboard = "unnamedplus"
-vim.g.clipboard = {
-  name = "wl-clipboard",
-  copy = {
-    ["+"] = "wl-copy",
-    ["*"] = "wl-copy",
-  },
-  paste = {
-    ["+"] = "wl-paste",
-    ["*"] = "wl-paste",
-  },
-  cache_enabled = 1,
-}
+local function copy_paste_setup()
+  local sysname = vim.loop.os_uname().sysname
+
+  if sysname == "Darwin" then
+    -- macOS: Use pbcopy and pbpaste
+    vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
+    vim.g.clipboard = {
+      name = "pbcopy/pbpaste",
+      copy = {
+        ["+"] = "pbcopy",
+        ["*"] = "pbcopy",
+      },
+      paste = {
+        ["+"] = "pbpaste",
+        ["*"] = "pbpaste",
+      },
+      cache_enabled = 0,
+    }
+    print("macOS detected: using pbcopy/pbpaste for clipboard")
+  elseif sysname == "Linux" then
+    -- Linux: Use wl-copy and wl-paste
+    vim.opt.clipboard = 'unnamedplus'
+    vim.g.clipboard = {
+      name = "wl-clipboard",
+      copy = {
+        ["+"] = "wl-copy",
+        ["*"] = "wl-copy",
+      },
+      paste = {
+        ["+"] = "wl-paste",
+        ["*"] = "wl-paste",
+      },
+      cache_enabled = 0,
+    }
+    print("Linux detected: using wl-copy/wl-paste for clipboard")
+  else
+    print("Unsupported OS detected")
+  end
+end
+
+-- Call the function to set up clipboard depending on the OS
+copy_paste_setup()
 
 vim.opt.relativenumber = true
 
