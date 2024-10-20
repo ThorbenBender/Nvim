@@ -17,6 +17,32 @@ local plugins = {
     end,
   },
   {
+    "ThePrimeagen/git-worktree.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+    },
+    config = function()
+      require("git-worktree").setup {
+        change_directory_command = "cd", -- default: "cd",
+        update_on_change = true, -- default: true,
+      }
+      local telescope, telescope_message = pcall(require, "telescope")
+      if not telescope then
+        print("Failed to load Telescope:", telescope_message)
+        return
+      else
+        print "Successfull loading telescope"
+      end
+
+      local result, extension_message = pcall(telescope.load_extension, "git_worktree")
+      if not result then
+        print("Failed to load git_worktree extension:", extension_message)
+      else
+        print "Loaded worktree"
+      end
+    end,
+  },
+  {
     "jose-elias-alvarez/null-ls.nvim",
     event = "VeryLazy",
     opts = function()
@@ -24,12 +50,12 @@ local plugins = {
     end,
   },
   {
-		"stevearc/conform.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("custom.configs.conform")
-		end,
-	},
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "custom.configs.conform"
+    end,
+  },
   {
     "jay-babu/mason-null-ls.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -84,9 +110,9 @@ local plugins = {
   },
   {
     "mfussenegger/nvim-dap",
-    init = function ()
-      require("core.utils").load_mappings("dap")
-    end
+    init = function()
+      require("core.utils").load_mappings "dap"
+    end,
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -170,20 +196,20 @@ local plugins = {
     "leoluz/nvim-dap-go",
     ft = "go",
     dependencies = "mfussenegger/nvim-dap",
-    config = function (_, opts)
+    config = function(_, opts)
       require("dap-go").setup(opts)
-      require("core.utils").load_mappings("dap_go")
-    end
+      require("core.utils").load_mappings "dap_go"
+    end,
   },
   {
     "olexsmir/gopher.nvim",
     ft = "go",
-    config = function (_, opts)
+    config = function(_, opts)
       require("gopher").setup(opts)
     end,
-    build = function ()
+    build = function()
       vim.cmd [[silent! GoInstallDeps]]
-    end
-  }
+    end,
+  },
 }
 return plugins

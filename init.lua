@@ -6,6 +6,7 @@ vim.env.PATH = vim.env.PATH .. ":/home/thorben/go/bin"
 if custom_init_path then
   dofile(custom_init_path)
 end
+vim.g.git_worktree_log_level = "debug"
 vim.opt.clipboard = "unnamedplus"
 vim.g.clipboard = {
   name = "wl-clipboard",

@@ -16,7 +16,7 @@ lspconfig.svelte.setup {
   root_dir = util.root_pattern("package.json", ".git"),
 }
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   init_options = {
@@ -41,7 +41,6 @@ lspconfig.gopls.setup {
     },
   },
 }
-
 
 lspconfig.clangd.setup {
   on_attach = function(client, bufnr)

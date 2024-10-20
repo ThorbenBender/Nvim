@@ -1,8 +1,6 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local rt = require "rust-tools"
-
 local options = {
   on_attach = on_attach,
   capabilities = capabilities,
@@ -13,12 +11,18 @@ local options = {
         cmd = { "/usr/bin/rust-analyzer" },
         check = {
           command = "clippy",
-          extraArgs = { "--all-targets", "--all-features" }
+          extraArgs = { "--all-targets", "--all-features" },
         },
+        displayInlayHints = true,
         cargo = {
-          features = "all"
+          features = "all",
         },
       },
+    },
+  },
+  tools = {
+    inlay_hints = {
+      only_current_line = true,
     },
   },
 }

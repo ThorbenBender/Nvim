@@ -17,6 +17,15 @@ _G.insert_fold_markers = function()
   vim.api.nvim_win_set_cursor(0, { current_line + 1, 0 })
 end
 
+M.worktrees = {
+  n = {
+    ["<leader>sr"] = {
+      "<cmd>lua require('telescope').git_worktree.git_worktrees()<CR>",
+      "Show worktress",
+    },
+  },
+}
+
 M.general = {
   n = {
     ["<C-h>"] = { "<cmd> TmuxNavigateLeft<CR>", "window left" },
