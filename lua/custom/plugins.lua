@@ -16,29 +16,29 @@ local plugins = {
       require("mason-lspconfig").setup(opts)
     end,
   },
+  "nvim-lua/plenary.nvim",
   {
     "ThePrimeagen/git-worktree.nvim",
     dependencies = {
       "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
     },
+    lazy = false,
     config = function()
       require("git-worktree").setup {
         change_directory_command = "cd", -- default: "cd",
         update_on_change = true, -- default: true,
       }
-      local telescope, telescope_message = pcall(require, "telescope")
-      if not telescope then
-        print("Failed to load Telescope:", telescope_message)
-        return
+      local telescope_ok, telescope = pcall(require, "telescope")
+      if telescope_ok then
+        local ok_extension, extension_message = pcall(telescope.load_extension, "git_worktree")
+        if not ok_extension then
+          vim.notify("Failed to load git_worktree extension: " .. extension_message, vim.log.levels.ERROR)
+        else
+          vim.notify("Successfully loaded git_worktree extension", vim.log.levels.INFO)
+        end
       else
-        print "Successfull loading telescope"
-      end
-
-      local result, extension_message = pcall(telescope.load_extension, "git_worktree")
-      if not result then
-        print("Failed to load git_worktree extension:", extension_message)
-      else
-        print "Loaded worktree"
+        vim.notify("Failed to load telescope.nvim: " .. telescope, vim.log.levels.ERROR)
       end
     end,
   },
