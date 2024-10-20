@@ -58,7 +58,7 @@ local options = {
     },
   },
 
-  extensions_list = { "themes", "terms", "git_worktree" },
+  extensions_list = { "themes", "terms" },
 }
 
 return options
