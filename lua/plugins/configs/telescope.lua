@@ -19,7 +19,7 @@ local options = {
     layout_strategy = "horizontal",
     layout_config = {
       horizontal = {
-        prompt_position = "top",
+        prompt_position = "bottom",
         -- preview_width = 0.55,
         -- results_width = 0.8,
       },
@@ -44,8 +44,17 @@ local options = {
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
     -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+    preview = {
+      hide_on_startup = true, -- hide previewer when picker starts
+    },
     mappings = {
-      n = { ["q"] = require("telescope.actions").close },
+      n = {
+        ["q"] = require("telescope.actions").close,
+        ["p"] = require("telescope.actions.layout").toggle_preview,
+      },
+      i = {
+        ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
+      },
     },
   },
 
