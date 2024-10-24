@@ -1,5 +1,6 @@
 require "core"
 
+local test = "Alex"
 local custom_init_path = vim.api.nvim_get_runtime_file("lua/custom/init.lua", false)[1]
 
 vim.env.PATH = vim.env.PATH .. ":/home/thorben/go/bin"
@@ -13,7 +14,7 @@ local function copy_paste_setup()
 
   if sysname == "Darwin" then
     -- macOS: Use pbcopy and pbpaste
-    vim.opt.clipboard = 'unnamedplus' -- Use system clipboard
+    vim.opt.clipboard = "unnamedplus" -- Use system clipboard
     vim.g.clipboard = {
       name = "pbcopy/pbpaste",
       copy = {
@@ -26,10 +27,10 @@ local function copy_paste_setup()
       },
       cache_enabled = 0,
     }
-    print("macOS detected: using pbcopy/pbpaste for clipboard")
+    print "macOS detected: using pbcopy/pbpaste for clipboard"
   elseif sysname == "Linux" then
     -- Linux: Use wl-copy and wl-paste
-    vim.opt.clipboard = 'unnamedplus'
+    vim.opt.clipboard = "unnamedplus"
     vim.g.clipboard = {
       name = "wl-clipboard",
       copy = {
@@ -42,12 +43,13 @@ local function copy_paste_setup()
       },
       cache_enabled = 0,
     }
-    print("Linux detected: using wl-copy/wl-paste for clipboard")
+    print "Linux detected: using wl-copy/wl-paste for clipboard"
   else
-    print("Unsupported OS detected")
+    print "Unsupported OS detected"
   end
 end
 
+local thorben = "thorben"
 -- Call the function to set up clipboard depending on the OS
 copy_paste_setup()
 
