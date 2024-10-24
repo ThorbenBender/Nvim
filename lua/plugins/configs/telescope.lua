@@ -33,7 +33,15 @@ local options = {
     file_sorter = require("telescope.sorters").get_fuzzy_file,
     file_ignore_patterns = { "node_modules" },
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-    path_display = "truncate",
+    path_display = function(_, path)
+      -- Option 1: Show just the last directory name
+      -- Option 2: Show last two directories
+      -- return path:match("[^/]+/[^/]+$")
+      -- Option 3: Show full path but format it
+      -- local parts = vim.split(path, "/")
+      -- return table.concat(parts, " › ")
+      return path:match "[^/]+$"
+    end,
     winblend = 0,
     border = {},
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
