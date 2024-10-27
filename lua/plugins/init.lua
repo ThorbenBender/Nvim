@@ -2,7 +2,6 @@
 -- List of all default plugins & their definitions
 local default_plugins = {
 
-
   {
     "NvChad/base46",
     branch = "v2.0",
@@ -207,22 +206,6 @@ local default_plugins = {
     end,
     config = function(_, opts)
       require("Comment").setup(opts)
-    end,
-  },
-
-  -- file managing , picker etc
-  {
-    "nvim-tree/nvim-tree.lua",
-    cmd = { "NvimTreeToggle", "NvimTreeFocus" },
-    init = function()
-      require("core.utils").load_mappings "nvimtree"
-    end,
-    opts = function()
-      return require "plugins.configs.nvimtree"
-    end,
-    config = function(_, opts)
-      dofile(vim.g.base46_cache .. "nvimtree")
-      require("nvim-tree").setup(opts)
     end,
   },
 
