@@ -10,8 +10,8 @@ local options = {
       "--column",
       "--smart-case",
     },
-    prompt_prefix = "   ",
     selection_caret = "  ",
+    prompt_prefix = "   ",
     entry_prefix = "  ",
     initial_mode = "insert",
     selection_strategy = "reset",
@@ -35,18 +35,15 @@ local options = {
     generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
     path_display = "truncate",
     winblend = 0,
-    border = {},
+    border = true,
     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
     color_devicons = true,
-    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
     set_env = { ["COLORTERM"] = "truecolor" },
     file_previewer = require("telescope.previewers").vim_buffer_cat.new,
     grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
     qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
-    -- Developer configurations: Not meant for general override
     buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
     preview = {
-      hide_on_startup = true, -- hide previewer when picker starts
       hide_on_startup = true,
     },
     mappings = {
@@ -59,8 +56,19 @@ local options = {
       },
     },
   },
-
+  pickers = {
+    highlights = {
+      theme = "dropdown",
+      previewer = false,
+    },
+  },
   extensions_list = { "themes", "terms" },
 }
+
+-- Set up highlight groups separately
+vim.api.nvim_command "highlight TelescopePromptPrefix guifg=#89dceb"
+vim.api.nvim_command "highlight TelescopeSelection guibg=#313244 gui=bold"
+vim.api.nvim_command "highlight TelescopeMatching guifg=#89b4fa"
+vim.api.nvim_command "highlight TelescopeBorder guifg=#585b70"
 
 return options
