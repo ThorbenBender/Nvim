@@ -25,10 +25,6 @@ local plugins = {
     },
     lazy = false,
     config = function()
-      require("git-worktree").setup {
-        change_directory_command = "cd", -- default: "cd",
-        update_on_change = true, -- default: true,
-      }
       local telescope_ok, telescope = pcall(require, "telescope")
       if telescope_ok then
         local ok_extension, extension_message = pcall(telescope.load_extension, "git_worktree")
