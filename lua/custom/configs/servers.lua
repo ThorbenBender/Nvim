@@ -1,11 +1,11 @@
 local servers = {
   "ts_ls",
+  "angularls",
+  "typescript-language-server",
   "tailwindcss",
   "svelte",
   "clangd",
   "rust_analyzer",
-  "astro",
-  "arduino_language_server",
   "bashls",
   "cssls",
   "dockerls",
@@ -17,8 +17,6 @@ local servers = {
   "marksman",
   "pyright",
   "sqls",
-  "taplo",
-  "lemminx",
   "yamlls",
   "zls",
 }

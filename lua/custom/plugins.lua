@@ -18,7 +18,29 @@ local plugins = {
   },
   "nvim-lua/plenary.nvim",
   {
-    "ThePrimeagen/git-worktree.nvim",
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.5",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "jonarrien/telescope-cmdline.nvim",
+    },
+    keys = {
+      { "Q", "<cmd>Telescope cmdline<cr>", desc = "Cmdline" },
+      { "<leader><leader>", "<cmd>Telescope cmdline<cr>", desc = "Cmdline" },
+    },
+    opts = {
+      extensions = {
+        cmdline = {},
+      },
+    },
+    config = function(_, opts)
+      require("telescope").setup(opts)
+      require("telescope").load_extension "cmdline"
+    end,
+  },
+  {
+    "polarmutex/git-worktree.nvim",
+    version = "^2",
     dependencies = {
       "nvim-telescope/telescope.nvim",
       "nvim-lua/plenary.nvim",
@@ -36,6 +58,13 @@ local plugins = {
       else
         vim.notify("Failed to load telescope.nvim: " .. telescope, vim.log.levels.ERROR)
       end
+    end,
+  },
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
+    init = function()
+      require("dressing").setup {}
     end,
   },
   {
@@ -107,15 +136,23 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     init = function()
+      require "custom.configs.dap"
       require("core.utils").load_mappings "dap"
     end,
   },
+  { "nvim-neotest/nvim-nio" },
   {
     "rcarriga/nvim-dap-ui",
     config = function()
-      require("dapui").setup()
+      require("dapui").setup {}
     end,
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    init = function()
+      require("nvim-dap-virtual-text").setup()
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -171,7 +208,7 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     opts = function()
-      opts = require "plugins.configs.treesitter"
+      local opts = require "plugins.configs.treesitter"
       opts.ensure_installed = {
         "lua",
         "javascript",
