@@ -95,13 +95,14 @@ M.worktrees = {
       function()
         getBranch()
       end,
-      "test",
+      "Create new worktree",
     },
     ["<leader>gc"] = {
       function()
         local branches = get_remote_branches()
         pick_remote_branch(branches)
       end,
+      "Checkout existing branch",
     },
   },
 }

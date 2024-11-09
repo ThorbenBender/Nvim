@@ -1,7 +1,5 @@
 local servers = {
   "ts_ls",
-  "angularls",
-  "typescript-language-server",
   "tailwindcss",
   "svelte",
   "clangd",

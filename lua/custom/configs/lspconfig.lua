@@ -28,27 +28,33 @@ lspconfig.ts_ls.setup {
   root_dir = lspconfig.util.root_pattern("pnpm-lock.yaml", "package.json", "tsconfig.json", ".git"),
 }
 
-lspconfig.angularls.setup {
-  cmd = {
-    "ngserver",
-    "--stdio",
-    "--tsProbeLocations",
-    vim.fn.getcwd() .. "/node_modules",
-    "--ngProbeLocations",
-    vim.fn.getcwd() .. "/node_modules",
-  },
-  on_new_config = function(new_config)
-    new_config.cmd = {
-      "ngserver",
-      "--stdio",
-      "--tsProbeLocations",
-      vim.fn.getcwd() .. "/node_modules",
-      "--ngProbeLocations",
-      vim.fn.getcwd() .. "/node_modules",
-    }
-  end,
-}
+-- lspconfig.angularls.setup {
+--   cmd = {
+--     "ngserver",
+--     "--stdio",
+--     "--tsProbeLocations",
+--     vim.fn.getcwd() .. "/node_modules",
+--     "--ngProbeLocations",
+--     vim.fn.getcwd() .. "/node_modules",
+--   },
+--   on_new_config = function(new_config)
+--     new_config.cmd = {
+--       "ngserver",
+--       "--stdio",
+--       "--tsProbeLocations",
+--       vim.fn.getcwd() .. "/node_modules",
+--       "--ngProbeLocations",
+--       vim.fn.getcwd() .. "/node_modules",
+--     }
+--   end,
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- }
 
+-- lspconfig.angularls.setup {
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+-- }
 lspconfig.gopls.setup {
   on_attach = on_attach,
   capabilities = capabilities,

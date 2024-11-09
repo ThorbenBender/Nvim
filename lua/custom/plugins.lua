@@ -16,6 +16,12 @@ local plugins = {
       require("mason-lspconfig").setup(opts)
     end,
   },
+  {
+    "rcarriga/nvim-notify",
+    config = function()
+      vim.notify = require "notify"
+    end,
+  },
   "nvim-lua/plenary.nvim",
   {
     "nvim-telescope/telescope.nvim",
@@ -47,6 +53,7 @@ local plugins = {
     },
     lazy = false,
     config = function()
+      require "custom.configs.worktree"
       local telescope_ok, telescope = pcall(require, "telescope")
       if telescope_ok then
         local ok_extension, extension_message = pcall(telescope.load_extension, "git_worktree")
