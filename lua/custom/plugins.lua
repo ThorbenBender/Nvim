@@ -71,7 +71,9 @@ local plugins = {
     "stevearc/dressing.nvim",
     opts = {},
     init = function()
-      require("dressing").setup {}
+      require("dressing").setup {
+        select = {},
+      }
     end,
   },
   {
