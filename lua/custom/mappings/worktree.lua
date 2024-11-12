@@ -11,7 +11,7 @@ end
 local getDir = function(branch)
   vim.ui.input({ prompt = "Directory" }, function(selected)
     if selected and selected ~= "" then
-      create_worktree(branch, selected)
+      M.create_worktree(branch, selected)
     end
   end)
 end
@@ -72,6 +72,30 @@ M.getBranch = function()
       getDir(branch)
     end
   end)
+end
+
+M.get_all_worktree = function()
+  local worktrees = vim.fn.systemlist "git worktree list"
+  local filtered_worktree = {}
+  for _, worktree in ipairs(worktrees) do
+    if not worktree:match "bare" then
+      local formatted_worktree = worktree:match ".*/(.-)%s+"
+      table.insert(filtered_worktree, formatted_worktree)
+    end
+  end
+  return filtered_worktree
+end
+
+M.delete_worktree_call = function()
+  local worktrees = M.get_all_worktree()
+  vim.ui.select(
+    worktrees,
+    { title = "Delete Worktree", telescope = require("telescope.themes").get_cursor() },
+    function(worktree)
+      vim.notify("Worktree: " .. worktree)
+      require("git-worktree").delete_worktree(worktree)
+    end
+  )
 end
 
 return M

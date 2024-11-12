@@ -37,7 +37,7 @@ M.worktrees = {
     },
     ["<leader>gd"] = {
       function()
-        vim.notify "Git deleted"
+        worktree.delete_worktree_call()
       end,
       "Delete worktree",
     },
